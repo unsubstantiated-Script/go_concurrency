@@ -1,6 +1,6 @@
 package main
 
-import "go_concurrency/dining_philosophers"
+import "go_concurrency/sleeping_barber"
 
 func main() {
 
@@ -9,6 +9,11 @@ func main() {
 	//second_example.SecondExample()
 	//second_example.AnotherSecondExample()
 	//producer_consumer.ProducerConsumer()
+	//dining_philosophers.DiningPhilosophers()
+	//simple_channels.ChannelDemo()
+	//simple_channels.SelectPractice()
+	//simple_channels.BufferedChannelDemo()
 
-	dining_philosophers.DiningPhilosophers()
+	sleeping_barber.SleepingBarber()
+
 }
