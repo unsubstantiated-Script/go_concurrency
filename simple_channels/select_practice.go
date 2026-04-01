@@ -1,0 +1,49 @@
+package simple_channels
+
+import (
+	"fmt"
+	"time"
+)
+
+func server1(ch chan string) {
+	for {
+		time.Sleep(6 * time.Second)
+		ch <- "Server 1 Sigining in"
+	}
+}
+
+func server2(ch chan string) {
+	for {
+		time.Sleep(3 * time.Second)
+		ch <- "Server 2 Sigining in"
+	}
+}
+
+func SelectPractice() {
+	fmt.Println("Select w/ channels")
+	fmt.Println("------------------")
+
+	channel1 := make(chan string)
+	channel2 := make(chan string)
+
+	go server1(channel1)
+	go server2(channel2)
+
+	for {
+		// select will wait for the first channel to receive a message. In this case it's good to pick work to do at random.
+		select {
+		case s1 := <-channel1:
+			fmt.Println("case 1: ", s1)
+		case s2 := <-channel1:
+			fmt.Println("case 2: ", s2)
+		case s3 := <-channel2:
+			fmt.Println("case 3: ", s3)
+		case s4 := <-channel2:
+			fmt.Println("case 4: ", s4)
+			//default:
+			//	// avoiding deadlock/crash
+			//	fmt.Println("default")
+		}
+	}
+
+}
